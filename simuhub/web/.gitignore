@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Build
+build/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
