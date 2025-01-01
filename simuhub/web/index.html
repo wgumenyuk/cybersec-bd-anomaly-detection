@@ -3,10 +3,24 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<style>
+			html, body {
+				@apply bg-silver-950 text-silver-100;
+			}
+		</style>
+		<script type="module" src="src/app.ts"></script>
 		<title>SimuHub</title>
 	</head>
 	<body>
-		<span>AYY</span>
-		<script type="module" src="src/app.ts"></script>
+		<div class="flex flex-col gap-8 p-16">
+			<!-- Header -->
+			<div class="flex flex-col gap-4">
+				<h1 class="text-4xl">SimuHub</h1>
+				<div class="flex items-center gap-2 select-none">
+					<div class="bg-emerald-500 w-2.5 h-2.5 rounded-full"></div>
+					<span class="text-emerald-500">Connected</span>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

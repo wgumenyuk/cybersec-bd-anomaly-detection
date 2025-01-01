@@ -4,5 +4,4 @@ import Alpine from "alpinejs";
 import "@fontsource/roboto/latin-400.css";
 import "./app.css";
 
-window.Alpine = Alpine;
 Alpine.start();
