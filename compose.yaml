@@ -1,0 +1,40 @@
+services:
+  etcd:
+    image: "bitnami/etcd:latest"
+    container_name: etcd
+    environment:
+      ALLOW_NONE_AUTHENTICATION: yes
+
+  fluentd:
+    image: "fluentd:latest"
+    volumes:
+      - "./fluentd/fluent.conf:/fluentd/etc/fluent.conf"
+    environment:
+      FLUENTD_CONF: fluent.conf
+
+  simuhub:
+    build: simuhub
+    depends_on:
+      - etcd
+    ports:
+      - "80:8080"
+    environment:
+      ETCD_URI: "etcd:2379"
+      ETCD_KEY: config
+
+  simulog:
+    build: simulog
+    deploy:
+      replicas: 10
+    depends_on:
+      - etcd
+      - fluentd
+    environment:
+      ETCD_URI: "etcd:2379"
+      ETCD_KEY: config
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "fluentd:24224"
+        fluentd-async-connect: "true"
+        tag: "simulog.{{.ID}}"
