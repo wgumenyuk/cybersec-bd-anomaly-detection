@@ -16,9 +16,87 @@
 			<!-- Header -->
 			<div class="flex flex-col gap-4">
 				<h1 class="text-4xl">SimuHub</h1>
-				<div class="flex items-center gap-2 select-none">
+				<div class="flex items-center gap-2 select-none" x-data="status" x-show="connected">
 					<div class="bg-emerald-500 w-2.5 h-2.5 rounded-full"></div>
 					<span class="text-emerald-500">Connected</span>
+				</div>
+				<div class="flex items-center gap-2 select-none" x-data="status" x-show="!connected">
+					<div class="bg-silver-500 w-2.5 h-2.5 rounded-full"></div>
+					<span class="text-silver-500">Connecting...</span>
+				</div>
+			</div>
+
+			<!-- Status -->
+			<div class="flex flex-col gap-4" x-data="status">
+				<h2 class="text-2xl">Status</h2>
+				…
+			</div>
+
+			<!-- Config -->
+			<div class="flex flex-col gap-4" x-data="config">
+				<h2 class="text-2xl">Parameters</h2>
+				<div class="flex flex-col gap-2 bg-silver-900 p-4 border border-silver-800 rounded-lg">
+					<span>T</span>
+					<div class="flex items-center gap-4">
+						<span class="bg-silver-800 w-12 px-2 py-1 border border-silver-700 rounded text-center" x-text="t + 's'"></span>
+						<input
+							type="range"
+							min="1"
+							max="10"
+							class="w-fit"
+							x-model:value="t"
+						/>
+					</div>
+				</div>
+				<div class="flex items-center gap-2">
+					<span>Total:</span>
+					<span class="bg-silver-900 w-12 px-2 py-1 border border-silver-800 rounded text-center" x-text="total / 100"></span>
+					<span
+						class="flex gap-2 items-center text-amber-500 text-sm ml-2"
+						x-show="total !== 100"
+						x-transition
+					>
+						<i data-lucide="octagon-alert"></i>
+						Weights need to add up to 1.
+					</span>
+				</div>
+				<img
+					src="/full_send.gif"
+					alt="Full Send"
+					class="absolute w-80 top-16 right-16 rounded-lg pointer-events-none"
+					x-show="weights['ddos'].value === 100"
+					x-transition
+				/>
+				<template x-for="weight, key in weights">
+					<div class="flex flex-col gap-2 bg-silver-900 p-4 border border-silver-800 rounded-lg">
+						<span x-text="weight.label"></span>
+						<div class="flex items-center gap-4">
+							<span class="bg-silver-800 w-12 px-2 py-1 border border-silver-700 rounded text-center" x-text="weight.value / 100"></span>
+							<input
+								type="range"
+								min="0"
+								max="100"
+								class="w-fit"
+								x-model:value="weight.value"
+								@input="weight.value = Math.min(weight.value, remaining(key))"
+							/>
+						</div>
+					</div>
+				</template>
+				<div class="flex items-center gap-4">
+					<button
+						class="bg-silver-900 hover:bg-silver-800 px-2.5 py-1.5 border border-silver-800 hover:border-silver-700 rounded select-none"
+						x-on:click="reset"
+					>
+						Reset
+					</button>
+					<button
+						class="bg-silver-900 hover:bg-silver-800 px-2.5 py-1.5 border border-silver-800 hover:border-silver-700 rounded select-none"
+						x-on:click="update"
+					>
+						Update
+					</button>
+					<i class="text-emerald-400" data-lucide="check" x-show="ok"></i>
 				</div>
 			</div>
 		</div>

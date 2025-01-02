@@ -1,9 +1,7 @@
 # Dependencies
 node_modules/
 
-# Build
+# Build Artefacts
 build/
-
-# Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

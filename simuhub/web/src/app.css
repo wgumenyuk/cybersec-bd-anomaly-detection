@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html, body {
-	@apply bg-silver-950 text-silver-100 max-w-[1920px] min-h-screen mx-auto;
+	@apply bg-silver-950 text-silver-100 max-w-[768px] min-h-screen mx-auto;
 }
