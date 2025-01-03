@@ -64,7 +64,7 @@
 					src="/full_send.gif"
 					alt="Full Send"
 					class="absolute w-80 top-16 right-16 rounded-lg pointer-events-none"
-					x-show="weights['ddos'].value === 100"
+					x-show="t === '1' && weights['ddos'].value === 100"
 					x-transition
 				/>
 				<template x-for="weight, key in weights">
