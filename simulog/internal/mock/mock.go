@@ -17,9 +17,9 @@ func Run(ctx context.Context, config *Config) {
 	for {
 		mode, err := gofakeit.Weighted(
 			[]any{
-				normal.Name,
-				bruteforce.Name,
-				ddos.Name,
+				normal.Mode,
+				bruteforce.Mode,
+				ddos.Mode,
 			},
 			[]float32{
 				config.Normal,
@@ -36,11 +36,11 @@ func Run(ctx context.Context, config *Config) {
 		done := make(chan bool, 1)
 
 		switch mode {
-		case normal.Name:
+		case normal.Mode:
 			go normal.Run(config, done)
-		case bruteforce.Name:
+		case bruteforce.Mode:
 			go bruteforce.Run(config, done)
-		case ddos.Name:
+		case ddos.Mode:
 			go ddos.Run(config, done)
 		default:
 			log.Error().Msgf("Unknown mode `%v`", mode)

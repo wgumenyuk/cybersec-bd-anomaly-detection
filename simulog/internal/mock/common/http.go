@@ -2,14 +2,27 @@ package common
 
 import "net/http"
 
-var Methods = []string{
+type ResponseTimeRange struct {
+	Min	uint
+	Max	uint
+}
+
+var ResponseTimesRanges = []any {
+	ResponseTimeRange{5, 50},
+	ResponseTimeRange{50, 150},
+	ResponseTimeRange{150, 300},
+	ResponseTimeRange{300, 2000},
+	ResponseTimeRange{2000, 5000},
+}
+
+var Methods = []any{
 	http.MethodGet,
 	http.MethodPost,
 	http.MethodPut,
 	http.MethodDelete,
 }
 
-var Status = []int{
+var Status = []any{
 	http.StatusOK,
 	http.StatusNotFound,
 	http.StatusBadRequest,

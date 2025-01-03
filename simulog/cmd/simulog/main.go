@@ -17,6 +17,11 @@ func main() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
+	log.Logger = zerolog.
+		New(os.Stdout).
+		With().
+		Logger()
+
 	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	if _, ok := os.LookupEnv("DEBUG"); ok {
