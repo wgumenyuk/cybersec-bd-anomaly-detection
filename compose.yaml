@@ -9,6 +9,12 @@ services:
     build: fluentd
     network_mode: host
 
+  rabbitmq:
+    image: "rabbitmq:management"
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
+
   simuhub:
     build: simuhub
     depends_on:
