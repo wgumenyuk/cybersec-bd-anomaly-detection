@@ -34,10 +34,10 @@ func main() {
 
 	defer etcd.Client.Close()
 
-	config := &mock.Config {
-		T: 5,
-		Normal: 1,
-		DDoS: 0,
+	config := &mock.Config{
+		T:          5,
+		Normal:     1,
+		DDoS:       0,
 		Bruteforce: 0,
 	}
 

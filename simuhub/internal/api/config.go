@@ -11,10 +11,10 @@ import (
 )
 
 type Config struct {
-	T			uint	`json:"t"`
-	Normal		float32 `json:"normal"`
-	Bruteforce	float32 `json:"bruteforce"`
-	DDoS		float32 `json:"ddos"`
+	T          uint    `json:"t"`
+	Normal     float32 `json:"normal"`
+	Bruteforce float32 `json:"bruteforce"`
+	DDoS       float32 `json:"ddos"`
 }
 
 func HandleGetConfig(c fiber.Ctx) error {
@@ -30,7 +30,7 @@ func HandleGetConfig(c fiber.Ctx) error {
 
 	if len(response.Kvs) == 0 {
 		return c.Status(fiber.StatusOK).JSON(&Config{
-			T: 5,
+			T:          5,
 			Normal:     1,
 			Bruteforce: 0,
 			DDoS:       0,
