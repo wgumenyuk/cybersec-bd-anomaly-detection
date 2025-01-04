@@ -3,11 +3,11 @@ package common
 import "net/http"
 
 type ResponseTimeRange struct {
-	Min	uint
-	Max	uint
+	Min uint
+	Max uint
 }
 
-var ResponseTimesRanges = []any {
+var ResponseTimesRanges = []any{
 	ResponseTimeRange{5, 50},
 	ResponseTimeRange{50, 150},
 	ResponseTimeRange{150, 300},

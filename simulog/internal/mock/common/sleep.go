@@ -6,5 +6,5 @@ import (
 )
 
 func Sleep(t uint) {
-	time.Sleep(time.Duration(rand.UintN(t) + 1) * time.Second)
+	time.Sleep(time.Duration(rand.UintN(t)+1) * time.Second)
 }
