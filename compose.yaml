@@ -6,12 +6,8 @@ services:
       ALLOW_NONE_AUTHENTICATION: yes
 
   fluentd:
-    image: "fluentd:latest"
+    build: fluentd
     network_mode: host
-    volumes:
-      - "./fluentd/fluent.conf:/fluentd/etc/fluent.conf"
-    environment:
-      FLUENT_CONF: fluent.conf
 
   simuhub:
     build: simuhub
