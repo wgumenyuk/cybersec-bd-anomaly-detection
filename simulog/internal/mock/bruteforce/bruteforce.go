@@ -13,8 +13,10 @@ const Mode = "bruteforce"
 const ticks = 10
 
 func Run(config *common.Config, done chan<- bool) {
-	ip := gofakeit.IPv4Address()
-	ua := gofakeit.UserAgent()
+	var (
+		ip = gofakeit.IPv4Address()
+		ua = gofakeit.UserAgent()
+	)
 
 	responseTimeRange, err := gofakeit.Weighted(
 		common.ResponseTimesRanges,
