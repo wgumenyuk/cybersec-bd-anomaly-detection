@@ -1,7 +1,5 @@
-FROM fluentd:latest
+FROM bitnami/fluentd:latest
 USER root
-RUN fluent-gem install fluent-plugin-rabbitmq
-USER fluent
+RUN fluent-gem install fluent-plugin-kafka
 COPY fluent.conf /fluentd/etc/
-EXPOSE 24224
 CMD exec fluentd -c /fluentd/etc/fluent.conf

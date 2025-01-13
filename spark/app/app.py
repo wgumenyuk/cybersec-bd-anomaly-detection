@@ -71,10 +71,10 @@ df = df \
 	.selectExpr("CAST(value AS STRING)") \
 	.withColumn("data", from_json(col("value"), schema))
 
-df = df \
-	.withColumn("is_valid", col("data").isNotNull()) \
-	.filter(col("is_valid")) \
-	.select("data.*")
+# df = df \
+# 	.withColumn("is_valid", col("data").isNotNull()) \
+# 	.filter(col("is_valid")) \
+# 	.select("data.status")
 
 df = df.withColumn("prediction", predict(col("data")))
 
