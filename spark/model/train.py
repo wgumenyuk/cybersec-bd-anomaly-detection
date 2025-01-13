@@ -13,8 +13,8 @@ df_bruteforce = pd.read_json(bruteforce_path, lines=True)
 df_ddos = pd.read_json(ddos_path, lines=True)
 
 df_normal["label"] = 0
-df_normal["label"] = 1
-df_normal["label"] = 2
+df_bruteforce["label"] = 1
+df_ddos["label"] = 2
 
 bruteforce_sample = df_bruteforce.sample(frac=0.7, random_state=42)
 ddos_sample = df_ddos.sample(frac=0.7, random_state=42)
