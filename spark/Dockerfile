@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=model-builder /app/model.pkl ./
 COPY app/ ./
 RUN pip install -r requirements.txt
-ENTRYPOINT [ "spark-submit", "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.4", "app.py" ]
+ENTRYPOINT [ "spark-submit", "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.4,org.elasticsearch:elasticsearch-spark-30_2.12:8.11.0", "app.py" ]

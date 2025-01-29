@@ -8,6 +8,7 @@ from pyspark.sql.types import FloatType, StringType, StructField, StructType
 
 KAFKA_URI = environ.get("KAFKA_URI")
 KAFKA_TOPIC = environ.get("KAFKA_TOPIC")
+ES_URI = environ.get("ES_URI")
 
 if not KAFKA_URI:
 	print("`KAFKA_URI` not found in environment variables", file=stderr)
@@ -15,6 +16,10 @@ if not KAFKA_URI:
 
 if not KAFKA_TOPIC:
 	print("`KAFKA_TOPIC` not found in environment variables", file=stderr)
+	exit(1)
+
+if not ES_URI:
+	print("`ES_URI` not found in environment variables", file=stderr)
 	exit(1)
 
 model = pickle.load(open("model.pkl", "rb"))
@@ -78,10 +83,24 @@ df = df \
 
 df = df.withColumn("prediction", predict(col("data")))
 
+# query = df \
+# 	.writeStream \
+# 	.outputMode("append") \
+# 	.format("console") \
+# 	.start()
+
 query = df \
 	.writeStream \
 	.outputMode("append") \
-	.format("console") \
+	.foreachBatch(lambda batch_df, _: batch_df.write \
+		.format("org.elasticsearch.spark.sql") \
+		.option("es.resource", "anomalies/_doc") \
+		.option("es.nodes", ES_URI)
+		.option("es.port", "9200")
+		.option("es.mapping.id", "id") \
+		.mode("append")
+		.save()
+	) \
 	.start()
 
 query.awaitTermination()
