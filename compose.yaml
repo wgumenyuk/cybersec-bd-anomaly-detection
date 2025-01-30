@@ -45,6 +45,7 @@ services:
       - spark
     network_mode: host
     environment:
+      ES_URI: "127.0.0.1:9200"
       KAFKA_URI: "127.0.0.1:9092"
       KAFKA_TOPIC: simulog
 
